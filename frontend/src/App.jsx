@@ -5,6 +5,7 @@ import "./App.css";
 import Landing from "./pages/Landing";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
+import Todo from "./components/Todo";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -12,7 +13,7 @@ function App() {
   return (
     <>
       <Nav />
-      ........
+      <Todo />
       <Footer />
     </>
   );
