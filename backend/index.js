@@ -1,4 +1,5 @@
 const express = require("express");
+<<<<<<< HEAD
 const { connect, Todo } = require("./Schema");
 const app = express();
 const Port = 3000;
@@ -34,3 +35,7 @@ app.listen(Port, function () {
      console.log("Server Started...");
      connect();
 })
+=======
+
+const app = express();
+>>>>>>> 36ba35d ( Temp)
