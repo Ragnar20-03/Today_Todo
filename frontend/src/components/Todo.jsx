@@ -1,36 +1,15 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 function Todo() {
-  const [todos, setTodos] = useState([
-    {
-      id: 1,
-      title: "Grocery Shopping",
-      status: "incompleted",
-      description: "Buy vegetables, fruits, and milk",
-      date: "2024-10-01",
-    },
-    {
-      id: 2,
-      title: "Finish Project Report",
-      status: "incompleted",
-      description: "Submit the final report to the manager",
-      date: "2024-09-30",
-    },
-    {
-      id: 3,
-      title: "Book Doctor's Appointment",
-      status: "incompleted",
-      description: "Scheduled appointment for next week",
-      date: "2024-09-28",
-    },
-    {
-      id: 4,
-      title: "Organize Workspace",
-      status: "incompleted",
-      description: "Clean and reorganize the home office",
-      date: "2024-09-25",
-    },
-  ]);
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:3000/getTodos").then((res) => {
+      console.log("res is : ", res);
+      setTodos(res.data.todos);
+    });
+  }, []);
 
   const [isOpen, setIsOpen] = useState(false);
   const [newTodo, setNewTodo] = useState({
@@ -62,12 +41,21 @@ function Todo() {
     e.preventDefault();
     const newId =
       todos.length > 0 ? Math.max(...todos.map((todo) => todo.id)) + 1 : 1;
-    const todoToAdd = {
+    const todo = {
       id: newId,
       ...newTodo,
       status: "incompleted",
     };
-    setTodos([...todos, todoToAdd]);
+
+    axios
+      .post("http://localhost:3000/addTodo", {
+        todo: todo,
+      })
+      .then((res) => {
+        console.log("res from Add Todo is  : ", res);
+      });
+
+    setTodos([...todos, todo]);
     setNewTodo({ title: "", description: "", date: "" });
     setIsOpen(false);
     console.log("Added new todo:", todoToAdd);
