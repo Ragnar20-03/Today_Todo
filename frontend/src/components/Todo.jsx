@@ -33,8 +33,8 @@ function Todo() {
   };
 
   const deleteTodo = (id) => {
-    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
-    console.log("Deleted todo with id:", id);
+    // setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+    // console.log("Deleted todo with id:", id);
   };
 
   const addTodo = (e) => {
